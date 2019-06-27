@@ -1,15 +1,21 @@
-const http = require('http');
+const express = require("express");
+const exphbs = require("express-handlebars");
+const path = require('path');
+
+const app = express();
+
+// express-handlebars middleware
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+//static folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+   res.render('index');
+})
+
 const port = process.env.PORT || 3000;
-
-const server = http.createServer((req, res) => {
-    res.setHeader('Content-Type', 'text/html');
-    res.write('<html>');
-    res.write('<head><title>My First Page</title><head>');
-    res.write('<body><h1>Hello from my Node.js Server!</h1></body>');
-    res.write('</html>');
-    res.end();
-});
-
-server.listen(port, () => {
+app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
