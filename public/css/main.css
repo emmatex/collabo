@@ -1,0 +1,18 @@
+.header {position: relative;}
+.logo { 
+    position: absolute; 
+    top: 35px; 
+    left: 35px;
+}
+.logo span {
+    font-size: 35px; 
+    vertical-align:super;
+}
+.pg404{ position: relative;}
+.pg404 div{ 
+    position: absolute; 
+    top: 186px; 
+    left: 682px;
+}
+.pg404 span { font-size: 8rem;}
+    
