@@ -15,4 +15,40 @@
     left: 682px;
 }
 .pg404 span { font-size: 8rem;}
-    
+
+.landing-btn{
+    position: absolute; 
+    top: 120px;
+    left: 35px;
+}
+
+.login-form,
+.register-form {
+    width: 20rem;
+    max-width: 90%;
+    margin: auto;
+    display: block;
+  }
+
+  .form-control {
+    margin: 1rem 0;
+    margin-bottom: 0.25rem;
+  }
+  
+  .main-login .card, .main-register .card {
+    box-shadow: 0 2px 8px #0d1010;
+    width: 402px;
+    height: 366px;
+    margin-top: 148px;
+    margin-left: 576px;
+    background-color: rgba(6, 6, 6, 0.125);
+  }
+
+  .main-login label, .main-register label {
+    margin-bottom: -1.5rem
+  }
+
+  .main-register .card {
+    height: 494px !important;
+    margin-top: 110px !important;
+  }
