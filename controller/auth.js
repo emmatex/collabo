@@ -1,15 +1,17 @@
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
-const sendGridTransport = require('nodemailer-sendgrid-transport');
 const User = require('../models/User');
 const config = require('../util/database');
+const transporter = nodemailer.createTransport(config.mailer);
 
-const transporter = nodemailer.createTransport(sendGridTransport({
-    auth: {
-        api_key: config.sendGridAPIKey
-    }
-}));
+//For sendgrid
+// const sendGridTransport = require('nodemailer-sendgrid-transport');
+// const transporter = nodemailer.createTransport(sendGridTransport({
+//     auth: {
+//         api_key: config.sendGridAPIKey
+//     }
+// }));
 
 exports.getLogin = (req, res, next) => {
     let message = req.flash('error');
@@ -69,7 +71,7 @@ exports.postRegister = (req, res, next) => {
     const confirmPassword = req.body.confirmPassword;
     User.findOne({ email: email }).then(userDoc => {
         if (userDoc) {
-            req.flash('error', 'That username or email is taken. Please try another.');
+            req.flash('error', 'That email is taken. Please try another.');
             return res.redirect('/register');
         }
         return bcrypt.hash(password, 12).then(hashedPassword => {
@@ -83,9 +85,9 @@ exports.postRegister = (req, res, next) => {
             res.redirect('/login');
             return transporter.sendMail({
                 to: email,
-                from: 'support@collabo.com',
-                subject: 'Welcome to Collabo! Signup Succeeded',
-                html: '<h1>You successfully signed up!</h1>'
+                from: 'Collabo <no-reply@collabo.com>',
+                subject: 'Welcome to Collabo! Signup Succeeded 👌 💋',
+                html: '<h4>You successfully signed up! 👨‍💻 👍</h4>'
             })
         }).catch(err => {
             console.log(err);
@@ -134,7 +136,7 @@ exports.postResetPassword = (req, res, next) => {
             transporter.sendMail({
                 to: req.body.email,
                 from: 'support@collabo.com',
-                subject: 'Password reset',
+                subject: 'Password reset 👨‍💻',
                 html: `<p>You requested a password reset</p>
               <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password.</p>`
             });
@@ -162,6 +164,7 @@ exports.getNewPassword = (req, res, next) => {
             userId: user._id.toString(),
             passwordToken: token
         });
+        console.log(userId);
     }).catch(err => {
         console.log(err);
     });
@@ -190,5 +193,3 @@ exports.postNewPassword = (req, res, next) => {
         console.log(err);
     });
 };
-
-

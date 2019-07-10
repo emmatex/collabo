@@ -9,6 +9,8 @@ const csrf = require('csurf');
 const flash = require('connect-flash');
 
 const config = require('./util/database');
+const User = require('./models/User');
+
 //controllers
 const errorController = require('./controller/error');
 
