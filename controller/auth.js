@@ -138,7 +138,8 @@ exports.postResetPassword = (req, res, next) => {
                 from: 'support@collabo.com',
                 subject: 'Password reset 👨‍💻',
                 html: `<p>You requested a password reset</p>
-              <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password.</p>`
+               <p>Click this <a href="https://calm-plateau-70181.herokuapp.com/reset/${token}">link</a> 
+                  to set a new password.</p>`
             });
         }).catch(err => {
             console.log(err);

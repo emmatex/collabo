@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'production') {
     mongoURI: 'mongodb://emmanuel:pass4sure@ds249123.mlab.com:49123/collabo',
     sessionKey: 'keyboard light',
     sendGridAPIKey: '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'
-  } 
+  }
 } else {
   module.exports = {
     mailer: {
@@ -26,5 +26,5 @@ if (process.env.NODE_ENV === 'production') {
     //mongoURI: 'mongodb+srv://emmanuel:pass4sure@cluster0-ryu8m.mongodb.net/collabo',
     sessionKey: 'keyboard light',
     sendGridAPIKey: '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'
-  } 
+  }
 }
