@@ -1,0 +1,17 @@
+<main class="main-login">
+    <br />
+    {{#if errorMessage}}
+    <div class="user-message user-message-error">{{ errorMessage }}</div>
+    {{/if}}
+    <div class="card">
+        <form class="login-form" action="/reset" method="POST">
+            <div class="form-group has-success">
+                <label class="form-control-label" for="inputSuccess1">Email</label>
+                <input type="email" name="email" class="form-control" id="inputValid">
+            </div>
+
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <button type="submit" class="btn btn-outline-primary btn-block">Reset Password</button>
+        </form>
+    </div>
+</main>
