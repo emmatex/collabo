@@ -8,7 +8,8 @@ module.exports = {
           pass: '!pass4sure'
         }
       },
-    connectionString: 'mongodb://localhost/collabo',
+    //connectionString: 'mongodb://localhost/collabo',
+    connectionString: 'mongodb+srv://emmanuel:pass4sure@cluster0-ryu8m.mongodb.net/collabo',
     sessionKey: 'keyboard light',
     sendGridAPIKey: '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'
 } 
