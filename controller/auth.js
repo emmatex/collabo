@@ -5,14 +5,6 @@ const User = require('../models/User');
 const config = require('../util/database');
 const transporter = nodemailer.createTransport(config.mailer);
 
-//For sendgrid
-// const sendGridTransport = require('nodemailer-sendgrid-transport');
-// const transporter = nodemailer.createTransport(sendGridTransport({
-//     auth: {
-//         api_key: config.sendGridAPIKey
-//     }
-// }));
-
 exports.getLogin = (req, res, next) => {
     let message = req.flash('error');
     if (message.length > 0) {
