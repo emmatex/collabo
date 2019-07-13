@@ -59,7 +59,7 @@ app.use(authRoute);
 
 app.use(errorController.get404);
 
-mongoose.connect(config.connectionString)
+mongoose.connect(config.mongoURI)
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));
 
