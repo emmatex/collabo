@@ -13,6 +13,7 @@ exports.getLogin = (req, res, next) => {
         message = null;
     }
     res.render('auth/login', {
+        pageTitle: 'Login',
         errorMessage: message
     });
 };
@@ -25,6 +26,7 @@ exports.getRegister = (req, res, next) => {
         message = null;
     }
     res.render('auth/register', {
+        pageTitle: 'Register',
         errorMessage: message
     });
 };
@@ -43,7 +45,7 @@ exports.postLogin = (req, res, next) => {
                 req.session.user = user;
                 return req.session.save(err => {
                     console.log(err);
-                    res.redirect('/');
+                    res.redirect('/home');
                 });
             }
             req.flash('error', 'Invalid email or password.');
@@ -104,6 +106,7 @@ exports.getResetPassword = (req, res, next) => {
         message = null;
     }
     res.render('auth/reset', {
+        pageTitle: 'Reset  password',
         errorMessage: message
     });
 };
@@ -153,6 +156,7 @@ exports.getNewPassword = (req, res, next) => {
             message = null;
         }
         res.render('auth/new-password', {
+            pageTitle: 'New Password',
             errorMessage: message,
             userId: user._id.toString(),
             passwordToken: token

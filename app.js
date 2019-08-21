@@ -25,6 +25,7 @@ const csrfProtection = csrf();
 
 const indexRoute = require('./routes/index');
 const authRoute = require('./routes/auth');
+const taskRoute = require('./routes/task');
 
 // middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -55,6 +56,7 @@ app.use((req, res, next) => {
 
 app.use(indexRoute);
 app.use(authRoute);
+app.use(taskRoute);
 
 app.use(errorController.get404);
 
@@ -64,6 +66,8 @@ mongoose.connect(config.mongoURI, {
     .catch(err => console.log(err));
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+require('./util/socket')(server);
