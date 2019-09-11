@@ -22,7 +22,6 @@ if (process.env.NODE_ENV === 'production') {
       }
     },
     mongoURI: 'mongodb://localhost/collabo',
-    //mongoURI: 'mongodb+srv://emmanuel:pass4sure@cluster0-ryu8m.mongodb.net/collabo',
     sessionKey: 'keyboard light'
   }
 }
