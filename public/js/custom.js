@@ -2,7 +2,8 @@ const EditorClient = ot.EditorClient;
 const SocketIOAdapter = ot.SocketIOAdapter;
 const CodeMirrorAdapter = ot.CodeMirrorAdapter;
 
-const socket = io.connect('http://localhost:3000');
+//const socket = io.connect('http://localhost:3000');
+const socket = io.connect('https://calm-plateau-70181.herokuapp.com');
 let editor = CodeMirror.fromTextArea(document.getElementById("code-screen"), {
     lineNumbers: true,
     theme: "dracula"
