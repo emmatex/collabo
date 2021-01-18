@@ -1,29 +1,26 @@
 {
-  "name": "collabo",
-  "version": "1.0.0",
-  "description": "Real time collaborative video | Rich text editor solution",
-  "main": "app.js",
+  "name": "code4share",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
-  },
-  "author": "Emmanuel",
-  "license": "MIT",
-  "devDependencies": {
-    "nodemon": "^1.19.1"
+    "start": "node ./bin/www"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "connect-flash": "^0.1.1",
-    "connect-mongodb-session": "^2.2.0",
-    "csurf": "^1.10.0",
-    "express": "^4.17.1",
-    "express-handlebars": "^3.1.0",
-    "express-session": "^1.16.2",
-    "mongoose": "^5.6.4",
-    "nodemailer": "^6.3.0",
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "express": "~4.14.1",
+    "express-session": "^1.15.1",
+    "express-validator": "^3.1.2",
+    "hbs": "~4.0.1",
+    "mongoose": "^4.8.6",
+    "morgan": "~1.7.0",
+    "nodemailer": "^3.1.5",
     "ot": "git+https://github.com/Operational-Transformation/ot.js.git",
-    "socket.io": "^2.2.0"
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "~2.3.2",
+    "socket.io": "^1.7.3"
   }
 }

@@ -1,10 +1,7 @@
-'use strict';
+var mongoose = require('mongoose');
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-
-var TaskSchema = new Schema({
+var taskSchema = new mongoose.Schema({
   content: String
 });
 
-module.exports = mongoose.model('task', TaskSchema);
+module.exports = mongoose.model('Task', taskSchema);

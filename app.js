@@ -1,73 +1,83 @@
-const express = require("express");
-const bodyParser = require('body-parser');
-const exphbs = require("express-handlebars");
-const mongoose = require('mongoose');
-const path = require('path');
-const session = require('express-session');
-const MongoDBStore = require('connect-mongodb-session')(session);
-const csrf = require('csurf');
-const flash = require('connect-flash');
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
 
+var mongoose = require('mongoose');
+var passport = require('passport');
+var session = require('express-session');
 
-const config = require('./util/database');
-const User = require('./models/User');
-//controllers
-const errorController = require('./controller/error');
+require('./passport');
+var config = require('./config');
 
-const app = express();
+var indexRoute = require('./routes/index');
+var authRoute = require('./routes/auth');
+var taskRoute = require('./routes/task');
 
-const store = new MongoDBStore({
-    uri: config.mongoURI,
-    collection: 'sessions'
-});
+// mongoose.connect(config.dbConnstring);
+mongoose.connect(config.dbConnstring, {
+  useMongoClient: true
+}).then(() => console.log("Mongodb Connected..."))
+  .catch(error => console.log(error));
+  
+global.User = require('./models/user');
+global.Task = require('./models/task');
 
-const csrfProtection = csrf();
+var app = express();
 
-const indexRoute = require('./routes/index');
-const authRoute = require('./routes/auth');
-const taskRoute = require('./routes/task');
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
-// middleware
-app.use(bodyParser.urlencoded({ extended: false }));
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
 app.use(bodyParser.json());
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-app.use(session({ secret: config.sessionKey, resave: false, saveUninitialized: false, store: store }));
-//TODO: still need to visit additional page for csurf token
-app.use(csrfProtection);
-app.use(flash());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 
-//static folder
+app.use(cookieParser());
+app.use(session({
+    secret: config.sessionKey,
+    resave: false,
+    saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
-    // res.locals.isAuthenticated = res.session.isLoggedIn();
-    res.locals.csrfToken = req.csrfToken();
-    next();
+app.use(function(req, res, next) {
+  if (req.isAuthenticated()) {
+    res.locals.user = req.user;
+  }
+  next();
 });
 
-app.use((req, res, next) => {
-    if (!req.session.user) { return next(); }
-    User.findById(req.session.user._id).then(user => {
-        req.user = user;
-        next();
-    }).catch(err => console.log(err));
+app.use('/', indexRoute);
+app.use('/', authRoute);
+app.use('/', taskRoute);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
-app.use(indexRoute);
-app.use(authRoute);
-app.use(taskRoute);
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-app.use(errorController.get404);
-
-mongoose.connect(config.mongoURI, {
-    useNewUrlParser: true
-}).then(() => console.log('MongoDB Connected...'))
-    .catch(err => console.log(err));
-
-const port = process.env.PORT || 3000;
-const server = app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
 });
 
-require('./util/socket')(server);
+module.exports = app;
