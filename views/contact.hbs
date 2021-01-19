@@ -1,13 +1,31 @@
-<h1 class="text-center">Contact Us</h1>
+<h1 class="text-center mb-5">Contact Us</h1>
 
-<form class="col-md-6 col-md-offset-3" method="post">
+<form class="col-md-6 col-md-offset-3 contact-form" method="post">
   {{#each errorMessages}}
     <div class="alert alert-danger">
         {{this.msg}}
     </div>
   {{/each}}
 
-  <div class="form-group">
+
+  <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Name</span>
+  <input class="form-control" placeholder="Your Name" name = "name" value = {{name}}>
+</div>
+
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">E-mail</span>
+  <input type="email" class="form-control" placeholder="Your Email" name = "email" value = {{email}}>
+</div>
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Message</span>
+    <textarea class="form-control" rows="3" name = "message">{{message}}</textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+  {{!-- <div class="form-group">
     <label>Name</label>
     <input class="form-control" placeholder="Your Name" name = "name" value = {{name}}>
   </div>
@@ -20,5 +38,5 @@
     <textarea class="form-control" rows="3" name = "message">{{message}}</textarea>
   </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Submit</button> --}}
 </form>

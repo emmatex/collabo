@@ -1,3 +1,5 @@
+  <h2 class="form-signin-heading text-center mb-5">New Account</h2>
+
 <form class="form-signin" method="post">
   {{#each errorMessages}}
     <div class="alert alert-danger">
@@ -5,10 +7,33 @@
     </div>
   {{/each}}
 
-  <h2 class="form-signin-heading text-center">New Account</h2>
-  <br/>
-
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Name</span>
   <input type="text" name="name" class="form-control" placeholder="Name" require="" autofocus="">
+</div>
+
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">E-mail</span>
+  <input type="email" name="email" class="form-control" placeholder="Email" require="" autofocus="">
+</div>
+
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Password</span>
+  <input type="password" name="password" class="form-control" placeholder="Password" require="">
+</div>
+
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Confirm</span>
+  <input type="password" name="confirmPassword" class="form-control" placeholder="Confirm Password" require="">
+</div>
+
+<button type="submit" class="btn btn-lg btn-primary btn-block">Sign Up</button>
+  <br/>
+  <h4 class="text-center">Or</h4>
+  <br/>
+  <a href="/auth/facebook" class="btn btn-lg btn-success btn-block">Sign Up with Facebook</a>
+
+  {{!-- <input type="text" name="name" class="form-control" placeholder="Name" require="" autofocus="">
   <br/>
   <input type="email" name="email" class="form-control" placeholder="Email" require="" autofocus="">
   <br/>
@@ -20,6 +45,6 @@
   <br/>
   <h4 class="text-center">Or</h4>
   <br/>
-  <a href="/auth/facebook" class="btn btn-lg btn-success btn-block">Sign Up with Facebook</a>
+  <a href="/auth/facebook" class="btn btn-lg btn-success btn-block">Sign Up with Facebook</a> --}}
 
 </form>
