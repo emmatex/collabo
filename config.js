@@ -4,8 +4,8 @@ module.exports = {
   mailer: {
     service: 'Gmail',
     auth: {
-      user: 'chuks09087064063@gmail.com',
-      pass: '!pass4sure'
+      user: 'GMAIL ADDRESS',
+      pass: 'PASSWORD'
     }
   },
   dbConnstring: 'mongodb://localhost/collabo',
